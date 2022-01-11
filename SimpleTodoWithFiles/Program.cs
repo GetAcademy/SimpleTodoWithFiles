@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace SimpleTodoWithFiles
@@ -49,7 +50,31 @@ namespace SimpleTodoWithFiles
                 {
                     Postpone(lines);
                 }
+                else if (command == "leggtil")
+                {
+                    lines = AddTodo(lines);
+                }
             }
+        }
+
+        private static string[] AddTodo(string[] lines)
+        {
+            Console.Write("Tekst: ");
+            var text = Console.ReadLine();
+            Console.Write("Frist: ");
+            var deadline = Console.ReadLine();
+            var line = $"{text},{deadline},false";
+
+            /*
+            var newLines = new string[lines.Length + 1];
+            Array.Copy(lines, newLines, lines.Length);
+            newLines[lines.Length] = line;
+            return newLines;
+            */
+
+            var list = new List<string>(lines);
+            list.Add(line);
+            return list.ToArray();
         }
 
         private static void Postpone(string[] lines)
